@@ -53,10 +53,28 @@ def imbalance_volume(df):
     return np.abs(ask_size_1 + ask_size_2 - bid_size_1 - bid_size_2)
 
 
-def spread(df, type):
+def spread_size(df, type):
     """
     Compute the spread
     """
     size_1 = df[f"{type}_size1"]
     size_2 = df[f"{type}_size2"]
     return size_1 - size_2
+
+
+def spread_price(df, type):
+    """
+    Compute the spread
+    """
+    price_1 = df[f"{type}_price1"]
+    price_2 = df[f"{type}_price2"]
+    return price_1 - price_2
+
+
+def price_spread(df, index):
+    """
+    Compute the price spred
+    """
+    ask_price = df[f"ask_price{index}"]
+    bid_price = df[f"bid_price{index}"]
+    return (ask_price - bid_price) / (ask_price + bid_price)

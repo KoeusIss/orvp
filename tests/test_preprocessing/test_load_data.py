@@ -8,12 +8,12 @@ def test_should_succeed_loading_test_data():
 
 
 @pytest.mark.parametrize("type, mode", [
-    ('book', 'validation'), # wrong mode
-    ('trade', 'validation'), # wrong mode
-    ('price', 'test'), # wrong type
-    ('price', 'train') # wrong type
+    ('book', 'validation'),
+    ('trade', 'validation'),
+    ('price', 'test'),
+    ('price', 'train')
 ])
-@pytest.mark.xfail(raises=TypeError)
+@pytest.mark.xfail(raises=ValueError)
 def test_should_fail_passing_wrong_type_or_mode(type, mode):
     df = get_df(0, type=type, mode=mode)
     assert df.shape == (3, 10)

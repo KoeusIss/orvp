@@ -28,11 +28,28 @@ TRADE_TYPES = {
 
 
 def get_df(stock_id, type="book", mode="train"):
+    """Load datasets and either  for testing or training for both, book and
+    Trade data.
+
+    Arguments:
+        stock_id {int} -- The stock_id referenece.
+
+    Keyword Arguments:
+        type {str} -- The type of data <book> or <trade> (default: {"book"})
+        mode {str} -- The load mode <train> or <test> (default: {"train"})
+
+    Raises:
+        ValueError: If the type isn't <book> or <trade>
+        ValueError: If the mode isn't <train> or <test>
+
+    Returns:
+        pd.DataFrame -- pandas DataFrame.
+    """
     if type not in ["book", "trade"]:
-        raise TypeError("WRONG: wrong type!")
+        raise ValueError("WRONG: wrong type!")
 
     if mode not in ["train", "test"]:
-        raise TypeError("WRONG: wrong mode!")
+        raise ValueError("WRONG: wrong mode!")
 
     types = f"{type.upper()}_TYPES"
     file_path = f"{BASE_PATH + type}_{mode}.parquet/stock_id={stock_id}"
